@@ -7,13 +7,13 @@ window.sharedState = "empty";
  * Pulls the value of the corresponding parameter from Flow.
  * @customfunction
  * @param {string} parameterName
- * @param {string} projectName
  * @returns The value of the given parameter.
  */
-async function flow(parameterName, projectName) {
-  let usernamePasswordArray = window.sharedState.split(" ");
-  let username = usernamePasswordArray[0];
-  let password = usernamePasswordArray[1];
+async function flow(parameterName) {
+  let inputArray = window.sharedState.split(" ");
+  let username = inputArray[0];
+  let password = inputArray[1];
+  let projectName = inputArray[2] + " " + inputArray[3];
 
   const query1 = {
     ClientId: "3asjpt4hmudvll6us1v45i1vs3",
