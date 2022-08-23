@@ -13,7 +13,7 @@ async function flow(parameterName) {
   let inputArray = window.sharedState.split(" ");
   let username = inputArray[0];
   let password = inputArray[1];
-  let projectName = inputArray[2] + " " + inputArray[3];
+  let projectName = getProjectName(inputArray);
 
   const query1 = {
     ClientId: "3asjpt4hmudvll6us1v45i1vs3",
@@ -37,7 +37,6 @@ async function flow(parameterName) {
     body: body,
   });
 
-  console.log(idToken);
   let idToken;
 
   idToken = await request.then((res) => res.json()).then((data) => data["AuthenticationResult"]["IdToken"]);
@@ -73,20 +72,6 @@ async function flow(parameterName) {
   });
 
   let projects = await projectQueryResult.then((res) => res.json()).then((data) => data["data"]["project"]);
-
-  function getMatchingProjectId(projectQueryRes, projectName) {
-    let project_id;
-    for (let project of projects) {
-      if (project["name"] == projectName) {
-        project_id = project["project_id"];
-      }
-    }
-    if (project_id == null) {
-      console.log("Please enter a project name which exists in Flow.");
-      return;
-    }
-    return project_id;
-  }
 
   let projectId = getMatchingProjectId(projects, projectName);
 
@@ -153,21 +138,44 @@ query Data($categoryId: uuid!) {
 
   let datas = await dataQueryResult.then((res) => res.json()).then((data) => data["data"]["data"]);
 
-  function getMatchingDataVal(dataQueryRes, parameterName) {
-    let parameterValue;
-    for (let data of dataQueryRes) {
-      if (data["name"] == parameterName) {
-        parameterValue = data["value"];
-      }
-    }
-    if (parameterValue == null) {
-      console.log("Please enter a parameter name which exists in Flow.");
-      return;
-    }
-    return parameterValue;
-  }
-
   let parameterVal = getMatchingDataVal(datas, parameterName);
 
   return parameterVal;
+}
+
+function getProjectName(inputArray) {
+  let projectName = "";
+  for (let i = 2; i < inputArray.length - 1; i++) {
+    projectName += inputArray[i] + " ";
+  }
+  projectName += inputArray[inputArray.length - 1];
+  return projectName;
+}
+
+function getMatchingProjectId(projects, projectName) {
+  let projectId;
+  for (let project of projects) {
+    if (project["name"] == projectName) {
+      projectId = project["project_id"];
+    }
+  }
+  if (projectId == null) {
+    console.log("Please enter a project name which exists in Flow.");
+    return;
+  }
+  return projectId;
+}
+
+function getMatchingDataVal(datas, parameterName) {
+  let parameterValue;
+  for (let data of datas) {
+    if (data["name"] == parameterName) {
+      parameterValue = data["value"];
+    }
+  }
+  if (parameterValue == null) {
+    console.log("Please enter a parameter name which exists in Flow.");
+    return;
+  }
+  return parameterValue;
 }
