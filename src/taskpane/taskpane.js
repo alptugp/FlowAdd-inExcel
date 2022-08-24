@@ -9,15 +9,26 @@
 Office.onReady(() => {
   document.getElementById("sideload-msg").style.display = "none";
   document.getElementById("app-body").style.display = "flex";
-  document.getElementById("run").onclick = run;
+  document.getElementById("runFunctions").onclick = runFunctions;
+  document.getElementById("copyWorkbook").onclick = copyWorkbook;
 });
 
-export async function run() {
+export async function runFunctions() {
   try {
     await Excel.run(async (context) => {
-      // getDocumentAsCompressed();
       let activeWorksheet = context.workbook.worksheets.getActiveWorksheet();
       activeWorksheet.calculate(true);
+      await context.sync();
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function copyWorkbook() {
+  try {
+    await Excel.run(async (context) => {
+      getDocumentAsCompressed();
       await context.sync();
     });
   } catch (error) {
