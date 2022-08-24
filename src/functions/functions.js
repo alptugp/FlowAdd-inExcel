@@ -1,5 +1,5 @@
 ﻿import fetch from "node-fetch";
-window.sharedState = "empty";
+window.sharedState = new Array();
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* global console setInterval, clearInterval */
 
@@ -10,10 +10,9 @@ window.sharedState = "empty";
  * @returns The value of the given parameter.
  */
 async function flow(parameterName) {
-  let inputArray = window.sharedState.split(" ");
-  let username = inputArray[0];
-  let password = inputArray[1];
-  let projectName = getProjectName(inputArray);
+  let username = window.sharedState[0];
+  let password = window.sharedState[1];
+  let projectName = window.sharedState[2];
 
   const query1 = {
     ClientId: "3asjpt4hmudvll6us1v45i1vs3",
@@ -141,15 +140,6 @@ query Data($categoryId: uuid!) {
   let parameterVal = getMatchingDataVal(datas, parameterName);
 
   return parameterVal;
-}
-
-function getProjectName(inputArray) {
-  let projectName = "";
-  for (let i = 2; i < inputArray.length - 1; i++) {
-    projectName += inputArray[i] + " ";
-  }
-  projectName += inputArray[inputArray.length - 1];
-  return projectName;
 }
 
 function getMatchingProjectId(projects, projectName) {

@@ -53,17 +53,41 @@
       </ol>
       
       <p>Enter your Flow account`s username, password and the project name you want to pull values from below</p>
+      <p>Username:</p>
       <div>
-        <input type="text" id="storeBox" />
-        <button onclick="storeSharedValue()">Store</button>
+        <input type="text" id="usernameBox" />
+        <button onclick="storeUsername()">Store</button>
+      </div>
+      <p>Password:</p>
+      <div>
+        <input type="text" id="passwordBox" />
+        <button onclick="storePassword()">Store</button>
+      </div>
+      <p>Project Name:</p>
+      <div>
+        <input type="text" id="projectBox" />
+        <button onclick="storeProjectName()">Store</button>
       </div>
   
       <script>
-        function storeSharedValue() {
-          let sharedValue = document.getElementById('storeBox').value;
-          window.sharedState = sharedValue;
+        function storeUsername() {
+          let username = document.getElementById('usernameBox').value;
+          window.sharedState[0] = username;
+        }
+      </script>
+      <script>
+        function storePassword() {
+          let password = document.getElementById('passwordBox').value;
+          window.sharedState[1] = password;
+        }
+      </script>
+      <script>
+        function storeProjectName() {
+          let projectName = document.getElementById('projectBox').value;
+          window.sharedState[2] = projectName;
         }
       </script>
 </body>
 
 </html>
+ 

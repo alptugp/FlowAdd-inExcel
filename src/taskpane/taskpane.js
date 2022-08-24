@@ -15,7 +15,7 @@ Office.onReady(() => {
 export async function run() {
   try {
     await Excel.run(async (context) => {
-      getDocumentAsCompressed();
+      // getDocumentAsCompressed();
       let activeWorksheet = context.workbook.worksheets.getActiveWorksheet();
       activeWorksheet.calculate(true);
       await context.sync();
@@ -89,9 +89,7 @@ function onGotAllSlices(docdataSlices) {
   document.getElementById("result").value = fileContent;
 
   async function newWorkbookFromFile() {
-    await Excel.createWorkbook(fileContent.text()).catch(function (error) {
-      console.error(error);
-    });
+    await Excel.createWorkbook(fileContent);
   }
 
   newWorkbookFromFile();
