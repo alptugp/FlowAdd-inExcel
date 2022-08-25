@@ -33,7 +33,7 @@
         <h2 class="ms-font-xl"> This add-in allows you to pull values from Flow and push the current Excel workbook to your OneDrive</h2>
         <ol>
           <li>
-            In the corresponding fields at the bottom of this taskpane, enter your Flow account's <b>username</b>, <b>password</b> and <b>name 
+            In the corresponding fields at the bottom of this taskpane, enter your Flow account's <b>email</b>, <b>password</b> and <b>name 
             of the project in Flow</b> which contains the values to be pulled and then click <b>Save</b>.
           </li>
           <li>
@@ -60,11 +60,11 @@
         <textarea id="result" name="w3review" rows="4" cols="50"> </textarea>
         -->
     </main>
-      <p>Enter your Flow account`s username, password and name of the project in Flow that you want to pull values from below</p>
-      <p><b>Username:</b></p>
+      <p>Enter your Flow account`s email, password and name of the project in Flow that you want to pull values from below</p>
+      <p><b>Email:</b></p>
       <div>
-        <input type="text" id="usernameBox" />
-        <button onclick="storeUsername()">Save</button>
+        <input type="text" id="emailBox" />
+        <button onclick="storeEmail()">Save</button>
       </div>
       <p><b>Password:</b></p>
       <div>
@@ -78,9 +78,9 @@
       </div>
   
       <script>
-        function storeUsername() {
-          let username = document.getElementById('usernameBox').value;
-          window.sharedState[0] = username;
+        function storeEmail() {
+          let email = document.getElementById('emailBox').value;
+          window.sharedState[0] = email;
         }
       </script>
       <script>
