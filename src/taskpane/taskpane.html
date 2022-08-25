@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contoso Task Pane Add-in</title>
+    <title>Flow Task Pane Add-in</title>
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
@@ -30,9 +30,25 @@
         <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
     </section>
     <main id="app-body" class="ms-welcome__main" style="display: none;">
-        <h2 class="ms-font-xl"> This add-in allows you to pull values from Flow, copy the opened Excel file to the specified path and push it to your OneDrive
-           </h2>
-        <p class="ms-font-l">To pull a value, enter your Flow username, password and project name below and then use the button below to run the Flow functions whose input should be the value`s name.</p>
+        <h2 class="ms-font-xl"> This add-in allows you to pull values from Flow and push the current Excel workbook to your OneDrive</h2>
+        <ol>
+          <li>
+            In the corresponding fields at the bottom of this taskpane, enter your Flow account's <b>username</b>, <b>password</b> and <b>name 
+            of the project in Flow</b> which contains the values to be pulled and then click <b>Save</b>.
+          </li>
+          <li>
+            To pull a value from Flow in a cell, type <b>=CONTOSO.FLOW("Value Name")</b> in the cell. 
+            The function's input should be the name of the value to be pulled from Flow written inside double quotes.
+          </li>
+          <li>
+            Press Enter within the cell to only run the function in it 
+            or click on <b>Run All Functions</b> below to run all the functions used in the current workbook.
+          </li>
+          <li>
+            When you want to make a copy of the current workbook and push it as a file to OneDrive, click on 
+            <b>Copy and Push Current Workbook</b>.
+          </li>
+        </ol>
         <div role="button" id="runFunctions" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl">
             <span class="ms-Button-label">Run All Functions</span>
         </div>
@@ -44,34 +60,21 @@
         <textarea id="result" name="w3review" rows="4" cols="50"> </textarea>
         -->
     </main>
-    <ol>
-        <li>
-          Instruction
-        </li>
-        <li>
-          Instruction
-        </li>
-        <li>
-          Instruction
-        </li>
-        <li>Instruction</li>
-      </ol>
-      
-      <p>Enter your Flow account`s username, password and the project name you want to pull values from below</p>
+      <p>Enter your Flow account`s username, password and name of the project in Flow that you want to pull values from below</p>
       <p><b>Username:</b></p>
       <div>
         <input type="text" id="usernameBox" />
-        <button onclick="storeUsername()">Store</button>
+        <button onclick="storeUsername()">Save</button>
       </div>
       <p><b>Password:</b></p>
       <div>
         <input type="text" id="passwordBox" />
-        <button onclick="storePassword()">Store</button>
+        <button onclick="storePassword()">Save</button>
       </div>
       <p><b>Project Name:</b></p>
       <div>
         <input type="text" id="projectBox" />
-        <button onclick="storeProjectName()">Store</button>
+        <button onclick="storeProjectName()">Save</button>
       </div>
   
       <script>
